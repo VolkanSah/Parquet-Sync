@@ -1,0 +1,58 @@
+name: "Data Operations Hub"
+
+on:
+  workflow_dispatch:
+    inputs:
+      action_type:
+        description: 'Choose direction:'
+        required: true
+        default: 'to_editable'
+        type: choice
+        options:
+          - to_editable
+          - to_export
+
+# Explicitly grant write permissions to the GITHUB_TOKEN to allow pushing 
+# processed data back to the repository.
+permissions:
+  contents: write
+
+jobs:
+  run_op:
+    runs-on: ubuntu-latest
+    
+    # Enforce Node.js 24 for all actions to comply with GitHub's 2026 
+    # deprecation policy for Node 20.
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      
+    steps:
+      # Use the repository's secret token for authentication during the push step.
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      # Setup the Python environment. v5 ensures compatibility with the latest Node runtimes.
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # Install Polars and PyArrow. Polars is the high-performance engine 
+      # used for memory-efficient Parquet/CSV processing.
+      - name: Install Polars
+        run: pip install polars pyarrow
+
+      # Execute the core sync logic based on user input (to_editable or to_export).
+      - name: Execute Sync
+        run: python scripts/sync.py ${{ github.event.inputs.action_type }}
+
+      # Configure a local git user and commit changes in 'editable/' or 'exports/'.
+      # The '|| echo' prevents the workflow from failing if no data has changed.
+      - name: Commit Changes
+        run: |
+          git config --local user.email "hub-action@github.com"
+          git config --local user.name "DataHub Bot"
+          git add editable/ exports/
+          git commit -m "Manual Sync: ${{ github.event.inputs.action_type }}" || echo "Nothing to commit"
+          git push
