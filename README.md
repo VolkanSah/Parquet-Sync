@@ -1,40 +1,41 @@
-# ParquetSync Hub
+# ParquetSync Hub ☕
 
-#### ☕ Released by Gemini & Volkan Sah
-**Created during a morning coffee session fueled by frustration.**
-Stashed and functional. This is a clean, automated bridge for people who hate editing binary files but love clean data for their LLM training.
+A minimalist, automated pipeline for managing and manually correcting binary Parquet datasets via a human-readable CSV bridge.
 
-##  Context & Integration
-This Hub is part of a larger ecosystem:
-* **[Universal AI HUB](https://github.com/VolkanSah/Multi-LLM-API-Gateway):** The gateway where the data is routed.
-* **[SmolLM2-customs](https://github.com/VolkanSah/SmolLM2-customs/):** The destination for the custom-trained models using this data (including the `adi` metrics).
+## What is this tool?
+This tool acts as a dedicated interface between machine-efficient binary data (`.parquet`) and the necessity of manual human intervention. It automates the conversion process, flattens nested structures, and recompiles data back into optimized binary files directly within the GitHub ecosystem.
 
-##  Architecture & Workflow
-The repository follows a strict **Raw-to-Edit-to-Export** flow to ensure data integrity. No JS-bloat, just pure Python/Polars efficiency.
+## Utility for Small Training Sets & Custom Metrics (ADI)
+When working with compact models (like **SmolLM2-360M**) and specialized logic such as the **AntiDumpIndex (ADI)**, the quality of individual data points is critical.
 
-| Directory | Purpose | Handling |
+* **Precision over Volume:** In small datasets, a single incorrect label or score (e.g., wrong ADI priorities) creates immediate model bias. This hub allows you to manually validate and override `adi_score`, `adi_decision`, or prompts.
+* **Nested Data Handling:** Complex metric objects (like `adi_metrics` lists) usually break CSV exports. This pipeline automatically flattens them into strings for editing and restores them for storage.
+* **Audit Trail:** Every change to your training data is tracked via CSV diffs, providing a transparent history of your dataset's evolution.
+
+## Architecture & Workflow
+The system enforces a strict **Raw -> Editable -> Export** flow to protect the integrity of the original data.
+
+| Directory | Content | Function |
 | :--- | :--- | :--- |
-| `raw/` | **Source of Truth** | Original `.parquet` files. Read-only for the pipeline. |
-| `editable/` | **Working Copy** | Decoupled `.csv` files for easy browser editing. |
-| `exports/` | **Production Ready** | Optimized `.parquet` recompiled for training/Hub. |
+| `raw/` | Original .parquet files | The "Source of Truth". Read-only for the pipeline. |
+| `editable/` | Generated .csv files | Human-readable working copy for the GitHub browser editor. |
+| `exports/` | Final .parquet files | Recompiled binary data for training or [AI HUB](https://github.com/VolkanSah/Multi-LLM-API-Gateway) integration. |
 
-## The Logic
-1. **Ingest:** Drop a new `.parquet` into `raw/`.
-2. **Transform:** Manual GitHub Action triggers `polars` to generate a readable CSV in `editable/`.
-3. **Human Edit:** Fix typos, adjust `adi_scores`, or prune rows directly in the GitHub Web UI.
-4. **Build:** Trigger the export to recompile the binary `.parquet` into `exports/`.
+### The Process
+1.  **To-Editable:** Converts Parquet to CSV using Polars. Nested types are cast to strings to ensure CSV compatibility.
+2.  **Edit:** Manually fix prompts or adjust ADI values directly in the GitHub Web UI.
+3.  **To-Export:** Triggers the recompilation of the edited CSV back into the `.parquet` format for the [SmolLM2-customs](https://github.com/VolkanSah/SmolLM2-customs/) training loop.
 
 ## Tech Stack
-- **Engine:** `Polars` (Lightning fast, handles 500MB+ without breaking GitHub Actions RAM).
-- **Automation:** GitHub Actions (Ubuntu-latest + Node 24 enforced).
-- **Storage:** Git LFS (Mandatory for keeping the repo slim).
+* **Polars:** High-performance DataFrame library for minimal RAM overhead in GitHub Actions.
+* **GitHub Actions:** Manual workflow control (Workflow Dispatch) for full process oversight.
+* **Git LFS:** Tracking for binary datasets in `raw/` and `exports/`.
 
-## Security & Integrity
-- **Scam Protection:** Keeping data binary in `exports/` makes it harder for basic scrapers to crawl your datasets.
-- **Noob-Proof:** Schema-aware processing (handles nested data by flattening to strings).
+## License
+This project is licensed under the **Apache License 2.0**.
 
 ---
-###  Dev Notes
-* **Initial Code:** Crafted by Gemini from a human idea after some "AI struggles".
-* **First Test after Human fixes (16.03.2026):** Export works! Gemini had some bugs, but we fixed them together.
-* **Status:** Functional. Ready to feed the SmolLM2 (or your) training loop.
+**Credits:**
+* **Concept & Architecture:** Volkan Sah
+* **Development:** Created during a morning coffee session to support the [Universal AI HUB](https://github.com/VolkanSah/Multi-LLM-API-Gateway) ecosystem.
+* **Technical Support:** Code crafted by Gemini 3 Flash based on human blueprints and requirements.
