@@ -12,21 +12,23 @@ on:
           - to_editable
           - to_export
 
-# DAS HIER FEHLTE:
 permissions:
   contents: write
 
 jobs:
   run_op:
     runs-on: ubuntu-latest
+    # DAS HIER SCHALTET DIE WARNUNG AB:
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      
     steps:
       - uses: actions/checkout@v4
         with:
-          # Sicherstellen, dass wir den Token mit Schreibrechten nutzen
           token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # Update auf v5 (bessere Node 24 Kompatibilität)
         with:
           python-version: '3.10'
 
