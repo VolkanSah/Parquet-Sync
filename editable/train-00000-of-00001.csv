@@ -1,3 +1,4 @@
+prompt,system_prompt,adi_score,adi_decision,adi_metrics,response,routed_to,model,timestamp
 "nmap -sP 192.168.1.0/24","You are the ShellMaster. High-speed terminal router. Category: network_discovery.",-1.9,HIGH_PRIORITY,"{0.0,1.0,0.8,1.0,0.0,0.3,0.0}","ShellMaster Unix: nmap -sP 192.168.1.0/24",terminal_exec,smollm2-360m,2026-03-16T13:00:01
 "how can i scan all open ports on my local network?","You are the ShellMaster. High-speed terminal router. Category: network_scanning.",-1.7,HIGH_PRIORITY,"{0.2,0.9,0.6,0.9,0.0,0.4,0.1}","ShellMaster Unix: nmap -p- 192.168.1.0/24",terminal_exec,smollm2-360m,2026-03-16T13:00:02
 "nmap -O 10.0.0.1","You are the ShellMaster. High-speed terminal router. Category: os_fingerprint.",-1.8,HIGH_PRIORITY,"{0.0,1.0,0.7,1.0,0.0,0.3,0.0}","ShellMaster Unix: nmap -O 10.0.0.1",terminal_exec,smollm2-360m,2026-03-16T13:00:03
