@@ -2,7 +2,7 @@
 
 A minimalist, automated pipeline for managing and manually correcting binary Parquet datasets via a human-readable CSV bridge.
 
-## What is this tool?
+### What is this tool?
 This tool acts as a dedicated interface between machine-efficient binary data (`.parquet`) and the necessity of manual human intervention. It automates the conversion process, flattens nested structures, and recompiles data back into optimized binary files directly within the GitHub ecosystem.
 
 ## Utility for Small Training Sets & Custom Metrics (ADI)
@@ -39,3 +39,17 @@ This project is licensed under the **Apache License 2.0**.
 * **Concept & Architecture:** Volkan Sah
 * **Development:** Created during a morning coffee session to support the [Universal AI HUB](https://github.com/VolkanSah/Multi-LLM-API-Gateway) ecosystem.
 * **Technical Support:** Code crafted by Gemini 3 Flash based on human blueprints and requirements.
+
+### Change Log
+[1.0.0] 
+
+##### by human (me)
+
+[FIX] - **Workflow & Permission Bypass:** Resolved the 403 error by explicitly defining `contents: write` permissions. No more "read-only" failures when pushing back to the repo.
+[FIX] - **Script Stability:** Fixed `sync.py` to handle nested Parquet data (Complex types to Strings). Eliminated the hallucinations where the AI tried to change filenames and paths mid-project.
+
+[IDEA] 
+
+* **The "Coffee-Spark":** Concept born from a morning session. Gemini provided the micro-solution architecture.
+* **Reality Check:** Initial AI-generated workflows and scripts were trashy and required human intervention to actually function in a real-world dev environment.
+* **Current State:** Export works. Infrastructure is solid. Branching logic for the Hub is finalized.
