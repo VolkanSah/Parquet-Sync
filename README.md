@@ -30,3 +30,5 @@ The repository follows a strict **Raw-to-Edit-to-Export** flow to ensure data in
 
 ---
 *Status: Stored for later. No code touched yet, just the blueprint.*
+
+> Idea crafted by GEmini (not tested)
