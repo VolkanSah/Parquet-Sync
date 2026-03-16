@@ -1,4 +1,4 @@
-# ParquetSync Hub ☕
+# ParquetSync ☕
 
 A minimalist, automated pipeline for managing and manually correcting binary Parquet datasets via a human-readable CSV bridge.
 
