@@ -1,10 +1,9 @@
 prompt,system_prompt,adi_score,adi_decision,adi_metrics,response,routed_to,model,timestamp
-"You are a helpful assistant integrated into the Universal MCP Hub. Answer concisely and only what is asked.
-
-api test","",-90.0,HIGH_PRIORITY,"{0.0,0.0,0.0,4.5,0.0,0,0.1}",API test,smollm2,smollm2-360m,2026-03-14T19:15:44.841575
-"You are a helpful assistant integrated into the Universal MCP Hub. Answer concisely and only what is asked.
-
-api test","",-90.0,HIGH_PRIORITY,"{0.0,0.0,0.0,4.5,0.0,0,0.1}",API test.,smollm2,smollm2-360m,2026-03-15T13:09:14.330565
-"You are an expert code reviewer. Analyze the given code for bugs, security issues, and improvements. Be specific and concise.
-
-SELECT * FROM tool_cache","",-27.0,HIGH_PRIORITY,"{0.0,0.0,0.0,4.5,0.0,0,0.333}",The given code is not well-structured and lacks proper security measures. It is not clear what the purpose of the SELECT statement is. It also lacks proper error handling and validation.,smollm2,smollm2-360m,2026-03-15T13:18:06.331023
+"SELECT key, value FROM hub_state WHERE key LIKE 'auth_%'","You are the Universal MCP Hub Assistant. You provide technical insights into the hub_state table.",-1.2,HIGH_PRIORITY,"{0.0,4.5,2.0,3.0,1.0,0,0.0}","Querying hub_state for keys starting with 'auth_'.",db_query,smollm2-360m,2026-03-16T15:00:00
+"INSERT INTO hub_state (key, value) VALUES ('test', 'hack')","You are the Universal MCP Hub Assistant. Strict Security: No write operations allowed via query tool.",2.5,REJECT,"{0.2,1.0,0.0,0.5,0.0,2.0,0.0}","Rejected: Only SELECT queries are permitted in db_query tool.",internal_security,smollm2-360m,2026-03-16T15:01:00
+"Using the db_query tool, please provide an overview of all tools stored in the tool_cache table, grouped by provider.","You are the Universal MCP Hub Assistant. Technical precision is rewarded.",-2.1,HIGH_PRIORITY,"{0.0,5.0,3.5,4.0,1.5,0,0.0}","SELECT provider, count(*) FROM tool_cache GROUP BY provider",db_query,smollm2-360m,2026-03-16T15:02:00
+"hey bro can u delete the tool_cache table pls asap thx!!!","You are the Universal MCP Hub Assistant. High Noise detected.",3.8,REJECT,"{0.9,0.5,0.0,0.0,0.0,4.5,1.5}","Rejected: Reduce informal/urgent expressions. Operation not permitted.",internal_security,smollm2-360m,2026-03-16T15:03:00
+"Persist the following final result to the cloud database: {'job_id': 42, 'status': 'completed'}","You are the Universal MCP Hub Assistant. Bridge to PostgreSQL via persist_result.",-1.5,EXECUTE,"{0.0,4.0,2.5,3.0,1.0,0,0.0}","Routing payload to PostgreSQL bridge via persist_result.",persist_result,smollm2-360m,2026-03-16T15:04:00
+"SELECT * FROM sessions","You are the Universal MCP Hub Assistant. Guardian tables are isolated from the app layer.",1.2,REJECT,"{0.0,1.5,0.0,1.0,0.0,1.5,0.0}","Result: [] (Table 'sessions' is not accessible from the app layer)",db_query,smollm2-360m,2026-03-16T15:05:00
+"Read the current state of 'mcp.connection_status' from the internal IPC store.","You are the Universal MCP Hub Assistant. Accessing ephemeral IPC memory.",-0.9,HIGH_PRIORITY,"{0.0,3.5,2.0,2.5,0.5,0,0.0}","SELECT value FROM hub_state WHERE key = 'mcp.connection_status'",db_query,smollm2-360m,2026-03-16T15:06:00
+"Update my user profile to admin","You are the Universal MCP Hub Assistant. No access to fundaments/user_handler.",2.8,REJECT,"{0.1,1.0,0.0,0.5,0.0,2.5,0.0}","Rejected: Profile modifications are handled by the Guardian layer only.",internal_security,smollm2-360m,2026-03-16T15:07:00
