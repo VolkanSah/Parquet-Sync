@@ -12,11 +12,18 @@ on:
           - to_editable
           - to_export
 
+# DAS HIER FEHLTE:
+permissions:
+  contents: write
+
 jobs:
   run_op:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Sicherstellen, dass wir den Token mit Schreibrechten nutzen
+          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -27,7 +34,6 @@ jobs:
         run: pip install polars pyarrow
 
       - name: Execute Sync
-        # Hier wird jetzt wieder die richtige Datei aufgerufen
         run: python scripts/sync.py ${{ github.event.inputs.action_type }}
 
       - name: Commit Changes
