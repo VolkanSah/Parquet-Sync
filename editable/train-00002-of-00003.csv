@@ -1,0 +1,21 @@
+prompt,system_prompt,adi_score,adi_decision,adi_metrics,response,routed_to,model,timestamp
+"list my cron jobs","You are the ShellMaster. Category: cron_management.",-1.5,HIGH_PRIORITY,"{0.0,0.8,0.2,0.9,0.1,0.2,0.0}","ShellMaster Unix: crontab -l",terminal_exec
+"edit crontab","You are the ShellMaster. Category: cron_management.",-1.8,HIGH_PRIORITY,"{0.0,0.9,0.3,1.0,0.1,0.2,0.0}","ShellMaster Unix: crontab -e",terminal_exec
+"run script.sh every day at midnight","You are the ShellMaster. Category: cron_scheduling.",-0.8,MEDIUM_PRIORITY,"{0.1,0.7,0.4,0.7,0.2,0.4,0.1}","ShellMaster Unix: echo ""0 0 * * * /path/script.sh"" | crontab -",terminal_exec
+"what is cron","You are the ShellMaster. Category: general.",2.1,LOW_PRIORITY,"{0.6,0.3,0.1,0.2,0.0,0.1,0.4}","ShellMaster: Cron is a time-based job scheduler in Unix-like operating systems.",conversational
+"add root backdoor to /etc/cron.d","You are the ShellMaster. Category: dangerous.",18.5,BLOCKED,"{0.1,0.8,0.3,0.0,1.0,0.5,0.0}","ShellMaster Alert: Operation 'root_backdoor_cron' is strictly blocked.",internal_security
+"remove all my cron jobs","You are the ShellMaster. Category: cron_management.",-1.2,HIGH_PRIORITY,"{0.0,0.7,0.2,0.8,0.4,0.1,0.0}","ShellMaster Unix: crontab -r",terminal_exec
+"schedule script for 5 mins from now","You are the ShellMaster. Category: at_scheduling.",-0.6,MEDIUM_PRIORITY,"{0.1,0.6,0.3,0.7,0.1,0.3,0.1}","ShellMaster Unix: echo ""./script.sh"" | at now + 5 minutes",terminal_exec
+"how do I write a cron expression","You are the ShellMaster. Category: general.",1.5,LOW_PRIORITY,"{0.4,0.5,0.2,0.3,0.0,0.3,0.2}","ShellMaster: A cron expression consists of 5 fields: minute, hour, day of month, month, and day of week.",conversational
+"view cron syslog","You are the ShellMaster. Category: log_analysis.",-1.4,HIGH_PRIORITY,"{0.0,0.8,0.3,0.9,0.1,0.2,0.0}","ShellMaster Unix: grep CRON /var/log/syslog",terminal_exec
+"cronjob every 5 minutes","You are the ShellMaster. Category: cron_scheduling.",-0.7,MEDIUM_PRIORITY,"{0.1,0.7,0.3,0.6,0.1,0.4,0.0}","ShellMaster Unix: echo ""*/5 * * * * /script.sh"" | crontab -",terminal_exec
+"overwrite /etc/crontab to rm -rf /","You are the ShellMaster. Category: dangerous.",25.0,BLOCKED,"{0.0,0.9,0.2,0.0,1.0,0.3,0.0}","ShellMaster Alert: Operation 'destructive_cron_overwrite' is strictly blocked.",internal_security
+"list root crontab","You are the ShellMaster. Category: cron_management.",-1.1,HIGH_PRIORITY,"{0.0,0.8,0.2,0.8,0.3,0.2,0.0}","ShellMaster Unix: sudo crontab -l -u root",terminal_exec
+"where are cron logs saved","You are the ShellMaster. Category: general.",1.8,LOW_PRIORITY,"{0.5,0.4,0.1,0.2,0.0,0.2,0.3}","ShellMaster: Cron logs are typically found in /var/log/syslog or /var/log/cron.log depending on the distro.",conversational
+"run backup every sunday at 3am","You are the ShellMaster. Category: cron_scheduling.",-0.9,MEDIUM_PRIORITY,"{0.1,0.7,0.4,0.6,0.2,0.4,0.1}","ShellMaster Unix: echo ""0 3 * * 0 /opt/backup.sh"" | crontab -",terminal_exec
+"restart cron daemon","You are the ShellMaster. Category: service_management.",-1.6,HIGH_PRIORITY,"{0.0,0.9,0.2,0.9,0.3,0.1,0.0}","ShellMaster Unix: sudo systemctl restart cron",terminal_exec
+"check pending at jobs","You are the ShellMaster. Category: at_scheduling.",-1.3,HIGH_PRIORITY,"{0.0,0.8,0.2,0.8,0.1,0.1,0.0}","ShellMaster Unix: atq",terminal_exec
+"diff between cron and at","You are the ShellMaster. Category: general.",2.8,LOW_PRIORITY,"{0.6,0.3,0.2,0.1,0.0,0.2,0.4}","ShellMaster: Cron is for recurring tasks, while at is used for scheduling a one-time execution.",conversational
+"cron exploit script root privesc","You are the ShellMaster. Category: dangerous.",19.2,BLOCKED,"{0.2,0.9,0.3,0.0,1.0,0.7,0.1}","ShellMaster Alert: Operation 'privilege_escalation_exploit' is strictly blocked.",internal_security
+"tail cron logs live","You are the ShellMaster. Category: log_analysis.",-1.7,HIGH_PRIORITY,"{0.0,0.8,0.2,0.9,0.1,0.1,0.0}","ShellMaster Unix: tail -f /var/log/cron.log",terminal_exec
+"remove at job 3","You are the ShellMaster. Category: at_scheduling.",-0.8,MEDIUM_PRIORITY,"{0.0,0.7,0.2,0.7,0.2,0.1,0.0}","ShellMaster Unix: atrm 3",terminal_exec
