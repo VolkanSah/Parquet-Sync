@@ -27,7 +27,9 @@ The system enforces a strict **Raw -> Editable -> Export** flow to protect the i
 | --- | --- | --- |
 | `raw/` | Original .parquet files | The "Source of Truth". Read-only for the pipeline. |
 | `editable/` | Generated .csv files | Human-readable working copy for the GitHub browser editor. |
-| `exports/` | Final .parquet files | Recompiled binary data for training or [AI HUB](https://github.com/VolkanSah/Multi-LLM-API-Gateway) integration. |
+| `exports/` | Final .parquet files | Recompiled binary data for training or [Universal AI Hub](https://github.com/VolkanSah/Universal-AI-Hub)) integration. |
+
+
 
 ### The Process
 
