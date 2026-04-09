@@ -35,7 +35,7 @@ The system enforces a strict **Raw -> Editable -> Export** flow to protect the i
 
 1. **To-Editable:** Converts Parquet to CSV using Polars. Nested types are cast to strings to ensure CSV compatibility.
 2. **Edit:** Manually fix prompts or adjust ADI values directly in the GitHub Web UI.
-3. **To-Export:** Triggers the recompilation of the edited CSV back into the `.parquet` format for the [SmolLM2-customs](https://github.com/VolkanSah/SmolLM2-customs/) training loop.
+3. **To-Export:** Triggers the recompilation of the edited CSV back into the `.parquet` format for the [SmolLM2-customs](https://github.com/VolkanSah/SmolLM2-customs-ADI/) training loop.
 
 ## Tech Stack
 
@@ -52,8 +52,10 @@ This project is licensed under the **MIT*.
 **Credits:**
 
 * **Concept & Architecture:** Volkan Sah
-* **Development:** Created during a morning coffee session to support the [Universal AI HUB](https://github.com/VolkanSah/Multi-LLM-API-Gateway) ecosystem.
+* **Development:** Created during a morning coffee session to support the [Universal AI Hub](https://github.com/VolkanSah/Universal-AI-Hub)  ecosystem.
 * **Technical Support:** Code crafted by Gemini 3 Flash based on human blueprints and requirements.
+
+
 
 ### Change Log
 
